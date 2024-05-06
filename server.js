@@ -4,12 +4,12 @@ const dotenv=require("dotenv").config();
 const cors = require('cors');
 const connectDB = require('./config/db'); 
 const path = require('path');
-import { fileURLToPath } from 'url';
+// const { fileURLToPath } = require('url');
 
 
 // deploye code &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
 console.log(__dirname);
 
 
