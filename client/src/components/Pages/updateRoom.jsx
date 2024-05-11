@@ -6,7 +6,7 @@ import SharingRoomPhoto from "../data/sharing.avif";
 import axios from "axios";
 
 const UpdateRoom = () => {
-  const [userRooms, setUserRooms] = useState([]);
+  const [userRoom, setUserRoom] = useState([]);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
@@ -18,7 +18,7 @@ const UpdateRoom = () => {
             Authorization: `Bearer ${token}`
           }
         });
-        setUserRooms(response.data);
+        setUserRoom(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -57,11 +57,11 @@ const UpdateRoom = () => {
 
         <h2>User Rooms</h2>
 
-        {userRooms.length === 0 ? (
+        {userRoom.length === 0 ? (
           <p>Your rooms count is zero first add room.</p>
         ) : (
           <div className='room-list'>
-            {userRooms.map((room) => (
+            {userRoom.map((room) => (
               (room.landlord === userId && room.type && room.address && room.status) && (
                 <div className='room-card' key={room.id}>
                   <div className='forImage'>

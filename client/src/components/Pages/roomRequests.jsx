@@ -4,7 +4,7 @@ import '../css/RoomSearch.css';
 import axios from 'axios';
 
 const RoomRequests = () => {
-  const [requests, setRequests] = useState([]);
+  const [request, setRequest] = useState([]);
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const RoomRequests = () => {
           },
         });
 
-        setRequests(response.data);
+        setRequest(response.data);
       } catch (error) {
         console.error('Error fetching room requests:', error);
       }
@@ -45,28 +45,28 @@ const RoomRequests = () => {
       <Navbar />
       <div className='requestPage'>
         <div className='room-list_requestPage'>
-          {requests.length === 0 ? (
+          {request.length === 0 ? (
             <p>No requests available for the current landlord.</p>
           ) : (
-            requests.map((request) => (
-              (request.landlord === userId) && (
-                <div className='room-card_requestPage' key={request._id} style={{width:"600px"}}>
+            request.map((req) => (
+              (req.landlord === userId) && (
+                <div className='room-card_requestPage' key={req._id} style={{width:"600px"}}>
                   <div className='roomDetails'>
                     <p className='lable'>Tenant Id:</p>
-                    <p className='inputFields'>{request.tenant}</p>
+                    <p className='inputFields'>{req.tenant}</p>
 
                     <p className='lable'>Landlord Id: </p>
-                    <p className='inputFields'>{request.landlord}</p>
+                    <p className='inputFields'>{req.landlord}</p>
 
                     <p className='lable'>Room Id: </p>
-                    <p className='inputFields'>{request.room}</p>
+                    <p className='inputFields'>{req.room}</p>
 
                     <p className='lable'>Status: </p>
-                    <p className='inputFields'>{request.status}</p>
+                    <p className='inputFields'>{req.status}</p>
                   </div>
                   <div className='updateButtons_box'>
-                    <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(request._id, 'accepted')}>Accept</button>
-                    <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(request._id, 'rejected')}>Reject</button>
+                    <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(req._id, 'accepted')}>Accept</button>
+                    <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(req._id, 'rejected')}>Reject</button>
                   </div>
                 </div>
               )

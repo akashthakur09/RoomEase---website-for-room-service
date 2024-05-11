@@ -35,13 +35,10 @@ const ExploreRoom = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-<<<<<<< HEAD
         
         setRoom(response.data);
-=======
-        const responseData = Array.isArray(response.data) ? response.data : [response.data];
-        setRooms(responseData);
->>>>>>> 554a5151877b6e7220dba477450380e2d8916e5c
+        // const responseData = Array.isArray(response.data) ? response.data : [response.data];
+        // setRoom(responseData);
       } catch (error) {
         setError(error.message);
       } finally {
