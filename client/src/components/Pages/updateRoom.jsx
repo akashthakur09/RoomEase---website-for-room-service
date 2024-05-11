@@ -65,7 +65,7 @@ const UpdateRoom = () => {
           <div className='room-list'>
             {userRoom.map((room) => (
               (room.landlord === userId && room.type && room.address && room.status) && (
-                <div className='room-card' key={room.id}>
+                <div className='room-card' key={room._id}>
                   <div className='forImage'>
                     <img src={SharingRoomPhoto} alt="Profile" className="Room-photo" />
                   </div>

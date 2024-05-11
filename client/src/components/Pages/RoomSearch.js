@@ -124,7 +124,7 @@ const ExploreRoom = () => {
             ) : (
               <div className='room-list'>
                 {room.map((r) => (
-                  <div className='room-card' key={r.id}>
+                  <div className='room-card' key={r._id}>
                     <div className='forImage'>
                       <img src={SharingRoomPhoto} alt="Profile" className="Room-photo" />
                     </div>
