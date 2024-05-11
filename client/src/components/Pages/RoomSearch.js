@@ -9,7 +9,7 @@ const ExploreRoom = () => {
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedRoomType, setSelectedRoomType] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,7 +35,8 @@ const ExploreRoom = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setRooms(response.data);
+        
+        setRoom(response.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -116,21 +117,21 @@ const ExploreRoom = () => {
           <p>Error: {error}</p>
         ) : (
           <>
-            {rooms.length === 0 ? (
+            {room.length === 0 ? (
               <p>There are no rooms for you.</p>
             ) : (
               <div className='room-list'>
-                {rooms.map((room) => (
-                  <div className='room-card' key={room.id}>
+                {room.map((r) => (
+                  <div className='room-card' key={r.id}>
                     <div className='forImage'>
                       <img src={SharingRoomPhoto} alt="Profile" className="Room-photo" />
                     </div>
                     <div className='roomDetails'>
-                      <p>Type: {room.type}</p>
-                      <p>Address: {room.address}</p>
-                      <p>City: {room.city}</p>
-                      <p>Status: {room.status}</p>
-                      <button className='searchBookBtn' onClick={() => request(room._id)}>Book</button>
+                      <p>Type: {r.type}</p>
+                      <p>Address: {r.address}</p>
+                      <p>City: {r.city}</p>
+                      <p>Status: {r.status}</p>
+                      <button className='searchBookBtn' onClick={() => request(r._id)}>Book</button>
                     </div>
                   </div>
                 ))}
