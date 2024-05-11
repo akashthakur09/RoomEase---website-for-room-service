@@ -35,7 +35,8 @@ const ExploreRoom = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
-        setRooms(response.data);
+        const responseData = Array.isArray(response.data) ? response.data : [response.data];
+        setRooms(responseData);
       } catch (error) {
         setError(error.message);
       } finally {
