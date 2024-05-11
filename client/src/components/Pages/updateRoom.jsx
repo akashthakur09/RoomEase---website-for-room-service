@@ -18,7 +18,9 @@ const UpdateRoom = () => {
             Authorization: `Bearer ${token}`
           }
         });
-        setUserRoom(response.data);
+        const responseData = Array.isArray(response.data) ? response.data : [response.data];
+        setUserRoom(responseData);
+        // setUserRoom(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

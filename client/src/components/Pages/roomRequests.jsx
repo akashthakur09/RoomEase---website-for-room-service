@@ -15,8 +15,13 @@ const RoomRequests = () => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
+        
+        
+        const responseData = Array.isArray(response.data) ? response.data : [response.data];
+        setRequest(responseData);
+        // setRequest(response.data);
 
-        setRequest(response.data);
+        
       } catch (error) {
         console.error('Error fetching room requests:', error);
       }

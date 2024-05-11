@@ -36,9 +36,9 @@ const ExploreRoom = () => {
           },
         });
         
-        setRoom(response.data);
-        // const responseData = Array.isArray(response.data) ? response.data : [response.data];
-        // setRoom(responseData);
+        // setRoom(response.data);
+        const responseData = Array.isArray(response.data) ? response.data : [response.data];
+        setRoom(responseData);
       } catch (error) {
         setError(error.message);
       } finally {
