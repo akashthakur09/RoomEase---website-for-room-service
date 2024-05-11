@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './llnavbar';
 import '../css/RoomSearch.css';
@@ -6,7 +5,7 @@ import axios from 'axios';
 
 const RoomRequests = () => {
   const [requests, setRequests] = useState([]);
-  const userId = localStorage.getItem('userId'); // Get the current landlord's ID from localStorage
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchRoomRequests = async () => {
@@ -24,7 +23,7 @@ const RoomRequests = () => {
     };
 
     fetchRoomRequests();
-  }, [userId]); // Include userId in the dependency array to re-fetch requests when it changes
+  }, [userId]);
 
   const updateStatusOfRoom = async (requestId, status) => {
     try {
@@ -46,29 +45,33 @@ const RoomRequests = () => {
       <Navbar />
       <div className='requestPage'>
         <div className='room-list_requestPage'>
-          {requests.map((request) => (
-            (request.landlord === userId) && (
-            <div className='room-card_requestPage' key={request._id} style={{width:"600px"}}>
-              <div className='roomDetails'>
-                <p className='lable'>Tenant Id:</p>
-                <p className='inputFields'>{request.tenant}</p>
+          {requests.length === 0 ? (
+            <p>No requests available for the current landlord.</p>
+          ) : (
+            requests.map((request) => (
+              (request.landlord === userId) && (
+                <div className='room-card_requestPage' key={request._id} style={{width:"600px"}}>
+                  <div className='roomDetails'>
+                    <p className='lable'>Tenant Id:</p>
+                    <p className='inputFields'>{request.tenant}</p>
 
-                <p className='lable'>Landlord Id: </p>
-                <p className='inputFields'>{request.landlord}</p>
+                    <p className='lable'>Landlord Id: </p>
+                    <p className='inputFields'>{request.landlord}</p>
 
-                <p className='lable'>Room Id: </p>
-                <p className='inputFields'>{request.room}</p>
+                    <p className='lable'>Room Id: </p>
+                    <p className='inputFields'>{request.room}</p>
 
-                <p className='lable'>Status: </p>
-                <p className='inputFields'>{request.status}</p>
-              </div>
-              <div className='updateButtons_box'>
-                <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(request._id, 'accepted')}>Accept</button>
-                <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(request._id, 'rejected')}>Reject</button>
-              </div>
-            </div>
-            )
-          ))}
+                    <p className='lable'>Status: </p>
+                    <p className='inputFields'>{request.status}</p>
+                  </div>
+                  <div className='updateButtons_box'>
+                    <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(request._id, 'accepted')}>Accept</button>
+                    <button className='updateAndDelete_btn' onClick={() => updateStatusOfRoom(request._id, 'rejected')}>Reject</button>
+                  </div>
+                </div>
+              )
+            ))
+          )}
         </div>
       </div>
     </div>
